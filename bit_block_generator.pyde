@@ -3,11 +3,11 @@ w = 1000
 h = 1000
 
 # Specify grid for the output image
-rows = 10
-columns = 5
+rows = 30
+columns = 41
 
 # Optionally, base the size of the resulting image from a specified cell size
-cell_size = 20
+cell_size = 10
 w = columns * cell_size
 h = rows * cell_size
 
@@ -23,35 +23,35 @@ skip_rows = []
 # Specify columns that will only be the primary color
 skip_columns = []
 
-
-
-# Give specific colors
-primary_color = (0, 100, 250)
+# Give specific colors (if you're not using random)
+primary_color = (0, 100, 200)
 secondary_color = (20, 20, 20)
 
-primary_probability = .4
+# Determines how often the primary color will be chosen
+primary_probability = .2
 
-# Grid
+# Display a grid on the output image
 grid = True
+grid_width = 1
 
-# Choose block borders
+# Choose block borders 
 top_border = True
 bottom_border = False
 left_border = True
 right_border = True
 
 # Draw Outline
-outline = false
+outline = True
 outline_width = 1
 outline_color = (255, 255, 255)
 
 # Add Accent color
-accent_color = False
-acc_probability = .04
+accent_color = True
+acc_probability = .1
 acc = (255, 255, 255)
 
-
 def setup():
+    
         
     sect_width = float(w)/columns
     sect_height = float(h)/rows
@@ -60,13 +60,14 @@ def setup():
     
     if (grid):
         stroke(0, 0, 0, 255)
+        strokeWeight(grid_width)
     else:
         noStroke()
     
     # Generate the random list of colors first
     colors = []
     for i in range(color_count):
-        colors.append((random(50, 100), random(50, 100), random(50, 100)))
+        colors.append((random(50, 200), random(50, 200), random(50, 200)))
     
     sym_queue = []
     
@@ -129,6 +130,6 @@ def setup():
                 rect(x * sect_width, y * sect_height, x * sect_width + sect_width, y * sect_height + sect_height)
 
 
-                
     
+    save("Examples/small" + str(int(random(10000))) + ".png")
     
